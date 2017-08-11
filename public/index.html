@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Cassandra</title>
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/solarized-light.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Cassandra</h1>
+				<h2>Une base de données taillée pour le big data</h2>
+			</section>
+
+			<!-- Démarrage -->
+			<section>
+				<section>
+					<h1>Qu'est-ce qu'on fait ici ?</h1>
+					<!-- objectif de la présentation -->
+				</section>
+				<section>
+					<h1>Qu'est-ce que Cassandra ?</h1>
+					<ul>
+						<li>large row</li>
+						<li>pair à pair</li>
+					</ul>
+				</section>
+			</section>
+
+			<!-- Présentation du cas -->
+
+			<section>
+				<section>
+					<!--h2>Recueillir les données de toutes les stations météo du territoire</h2-->
+					<img class="stretch" src="station-meteo.jpg" />
+					<!--
+						- satélite
+						- bouée
+						- station mobile (bateau)
+					-->
+					<!--
+						- point de rosée
+						- direction du vent
+						- pluviométrie
+					-->
+				</section>
+
+				<section>
+					<img class="stretch" src="diagram.png" />
+				</section>
+
+				<section>
+					<h2>Besoins</h2>
+					<ul>
+						<li>cluster réparti en france (+DOM/TOM) avec un gros cluster en île de France</li>
+						<li>volumétrie</ul>
+						<li>hétérogénéité des données</li>
+					</ul>
+				</section>
+			</section>
+
+			<!-- Présentation de la solution -->
+			<section>
+				<!-- Schemas -->
+				<section>
+					<h2>Requètes sur la base</h2>
+					<!-- décrire les quelques requêtes fréquentes/qui renvoient du volume important -->
+				</section>
+				<section>
+					<h2>Présentation du schemas 1/2</h2>
+					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
+				</section>
+				<section>
+					<h2>Présentation du schemas 2/2</h2>
+					<!-- expliquer que l'on utilise une colonne par capteur et pas par type de capteur, on peut mettre une grosse image dans une colonne sans souci -->
+				</section>
+				<section>
+					<h2>Déploiement</h2>
+					<!-- description de l'organisation du cluster, du facteur de réplication -->
+				</section>
+				<section>
+					<h2>Qualité de la donnée</h2>
+					<!-- besoin de faire de la normalisation de données au vol et en batch -->
+					<!-- impact sur la politique d'écriture -->
+				</section>
+				<section>
+					<h2>Présentation des données</h2>
+					<!-- utilisation d'index extérieur -->
+					<!-- création de cluster spécifiques pour des clients -->
+					<!-- possibilité d'utiliser des vues matérialisées -->
+				</section>
+			</section>
+
+			<!-- conclusion -->
+			<section>
+				<h2>Pro/Cons</h2>
+				<!-- base de données très particulière -->
+				<!-- parler d'iCloud ici ? -->
+				<!-- rex -->
+			</section>
+		</div>
+	</div>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// Required, even if empty.
+		Reveal.initialize({
+		});
+	</script>
+</body>
+</html>
