@@ -202,6 +202,55 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 
 			<section>
 				<section>
+					<h1>4. Qualité de la donnée</h1>
+				</section>
+				<section>
+					<h2>Besoins:</h2>
+					<ul>
+						<li>
+							Normalisation des données
+							<ul>
+								<li>Alignement</li>
+								<li>Ajustements, corrections</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Solution:</h2>
+					<ol>
+						<li>
+							Pre-processing
+							<ul>
+								<li>avant insertion dans Cassandra</li>
+								<li>hors-contexte</li>
+								<li>&rArr; <code>TRIGGER</code></li>
+							</ul>
+						</li>
+						<li>
+							Batch processing
+							<ul>
+								<li>Affinage des données</li>
+								<li>En tâche de fond</li>
+								<li></li>
+								<li>&rArr; Spark</li>
+							</ul>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<h2>Consistence des données</h2>
+					<ul>
+						<li><code>ONE</code></li>
+						<li><code>QUORUM</code></li>
+						<li><code>ALL</code></li>
+						<li>versions locales au DC, ex: <code>LOCAL_QUORUM</code></li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
 					<h1>5. Requêter autrement</h1>
 				</section>
 				<section>
@@ -223,6 +272,12 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 						</li>
 					</ul>
 				</section>
+				<section>
+					<h2>Vue matérialisée</h2>
+
+				</section>
+
+
 			</section>
 
 
