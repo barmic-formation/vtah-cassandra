@@ -1,8 +1,13 @@
+/* Bigger slide numbers*/
+.reveal .slide-number {
+    font-size: 20pt;
+}
+
+/* The "TO DO" class */
 .todo {
     color: crimson;
     font-family: monospace !important;
 }
-
 .todo::before {
-    content: '// TODO '
+    content: '// TODO ';
 }

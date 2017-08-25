@@ -130,6 +130,64 @@
 				</section>
 			</section>
 
+			<section>
+				<section>
+					<h1>5. Requêter autrement</h1>
+				</section>
+				<section>
+					<h2>Besoins:</h2>
+					<ul>
+						<li>Accéder à tous les relevés dans une certaine zone</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Solution:</h2>
+					<ul>
+						<li>Vue matérialisée</li>
+						<li>
+							Index externe, moteur de recherche
+							<ul>
+								<li>Elastic Search, Apache Solr, Apache Lucene, ...</li>
+								<li><em>Limites</em> des clés de Cassandra</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+			</section>
+
+
+			<section>
+				<section>
+					<h1>6. Duplication Cluster</h1>
+				</section>
+                <section>
+                    <h2>Besoins:</h2>
+                    <ul>
+                        <li>Garantie d'accès aux client importants</li>
+                        <li>Sandbox pour expérimentations</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Solution:</h2>
+                    <ul>
+                        <li>
+                            Clusters "premium" ou dédiés
+                            <ul>
+                                <li>Moins de charge</li>
+                                <li>Géographiquement plus près du/des clients</li>
+                            </ul>
+                        </li>
+                        <li>
+							Stratégie de réplication/placement "custom"
+							<ul>
+								<li>étendre <code>AbstractReplicationStrategy</code></li>
+								<li>étendre <code>IEndpointSnitch</code></li>
+							</ul>
+						</li>
+                    </ul>
+                </section>
+			</section>
+
 			<!-- conclusion -->
 			<section>
 				<h2>Pro/Cons</h2>
@@ -145,7 +203,9 @@
 	<script>
 		// Required, even if empty.
 		Reveal.initialize({
-			history: true // Enable slide number in URL fragment
+            // slideNumber: 'c/t', // Absolute slide numbers (with total).
+            slideNumber: true, // Enable hierarchical slide numbers
+            history: true // Enable slide number in URL fragment
 		});
 	</script>
 </body>
