@@ -34,7 +34,7 @@
 				</section>
 
 				<section>
-					<h1>Qu'est-ce que Cassandra ?</h1>
+					<h1>Apache Cassandra</h1>
 					<ul>
 						<li class="todo">Tagcloud plugin</li>
 						<li>large row</li>
@@ -42,7 +42,6 @@
 						<li>HA</li>
 						<li>made for Facebook</li>
 						<li>NoSQL</li>
-						<li></li>
 					</ul>
 				</section>
 
@@ -83,35 +82,88 @@
 
 			<!-- Présentation de la solution -->
 			<section>
-				<!-- Schemas -->
+				<!-- Part 1 -->
 				<section>
-					<h2>Requètes sur la base</h2>
+					<h2>Principales requètes</h2>
 					<ul>
-						<li>Quelles sont les données reçues hier dans le bassin grenoblois ? <span class="fragment">70 %</span></li>
-						<li>Quelles sont les données reçues depuis une central reçues hier dans le bassin grenoblois ? <span class="fragment">30 %</span></li>
+						<li>Quelles sont les données reçues <span class="fragment highlight-blue">hier</span> dans le <span class="fragment highlight-blue">bassin grenoblois</span> ? <span class="fragment">70 %</span></li>
+						<li>Quelles sont les données reçues depuis une central reçues <span class="fragment highlight-blue">hier</span> dans le <span class="fragment highlight-blue">bassin grenoblois</span> ? <span class="fragment">30 %</span></li>
 					</ul>
-					<!-- décrire les quelques requêtes fréquentes/qui renvoient du volume important -->
 				</section>
 				<section>
-					<h2>Schemas : création de la clef</h2>
+					<h2>Choix de la clef</h2>
 					<ul>
-						<li><b>PARTITION KEY</b> clef de partitionnement</li><!-- propriété que la clef de partitionnement -->
+						<li><b>PARTITION KEY</b></li>
 						<li><b>CLUSTERING KEY</b> identification au sein de la partition</li>
 					</ul>
 					<pre>
-					<code data-trim>PRIMARY KEY((zone, day), stationId)</code>
+					<code data-trim>PRIMARY KEY((zone, day), station_id, event_time)</code>
 					</pre>
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
 				</section>
 				<section>
-					<h2>Schemas : donnée utile</h2>
+					<h2>Choix d'une clef de partitionnement</h2>
 					<ul>
-						<li>une colonne par capteurs différents</li>
-						<li>type utilisateur (UDT)</li>
+						<li>Doit être invariant pour une donnée</li>
+						<li>Doit discriminer correctement les données</li>
+						<li>Devrait permettre une colocalisation des accès/traitement</li>
+					</ul>
+				</section>
+				<section>
+					<h2></h2>
+					Difficulté de connaître les requêtes à l'avance
+					<ul>
+						<li class="fragment">Monitorer</li>
+						<li class="fragment">Rester ouvert aux changements</li>
+					</ul>
+					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
+				</section>
+			</section>
+
+				<!-- Part 2 -->
+			<section>
+				<section>
+					<h2>Données des stations</h2>
+					<ul>
+						<li>grand nombre de capteurs différents</li>
 						<li>stockage d'image</li>
 					</ul>
 					<!-- expliquer que l'on utilise une colonne par capteur et pas par type de capteur, on peut mettre une grosse image dans une colonne sans souci -->
 				</section>
+				<section>
+					<p>Stocker les données de chaque capteurs dans une colonne</p>
+					<ul>
+						<li>cassandra propose jusqu'à 2M colonnes</li>
+						<li>les <i>User Defined Type</i> permettent de stocker des données complexes</li>
+						<li>chaque cellule peut stocker jusqu'à 2Gio</li>
+					</ul>
+				</section>
+				<section>
+					<pre>
+						<code>
+CREATE TYPE sensor (
+	pressure int,
+	hygrometry int
+);
+CREATE TABLE station (
+	zone text,
+	day int,
+	station_id text,
+	station_id timestamp,
+	sensor1 sensor,
+
+	PRIMARY KEY((zone, day), station_id)
+);
+
+INSERT INTO mykeyspace.stations (zone, day, station_id, event_time)
+VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
+						</code>
+					</pre>
+				</section>
+				<section>
+			</section>
+
+
 				<section>
 					<h2>Déploiement</h2>
 					<!-- Dessin d'un cluster -->
