@@ -160,26 +160,44 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 						</code>
 					</pre>
 				</section>
-				<section>
 			</section>
 
-
+			<section>
 				<section>
 					<h2>Déploiement</h2>
-					<!-- Dessin d'un cluster -->
-					<!-- description de l'organisation du cluster, du facteur de réplication -->
+					<!-- besoin -->
+					<h3>Besoin</h3>
+					<ul>
+						<li>Haute disponibilité</li>
+						<li>Gros volume de données (rétention infinies, centaines de stations)</li>
+					</ul>
+				</section>
+				<!-- Dessin d'un cluster -->
+				<section>
+					<img class="stretch" src="cluster.svg" />
 				</section>
 				<section>
-					<h2>Qualité de la donnée</h2>
-					<!-- besoin de faire de la normalisation de données au vol et en batch -->
-					<!-- impact sur la politique d'écriture -->
+					<img class="stretch" src="france.svg" />
 				</section>
 				<section>
-					<h2>Présentation des données</h2>
-					<!-- utilisation d'index extérieur -->
-					<!-- création de cluster spécifiques pour des clients -->
-					<!-- possibilité d'utiliser des vues matérialisées -->
+					<ul>
+						<li>Apache Cassandra n'est pas élatique !</li>
+						<li>1 seul nœud c'est mal</li>
+						<li>beaucoup de resources</li>
+					</ul>
 				</section>
+				<!-- description de l'organisation du cluster, du facteur de réplication -->
+			</section>
+			<section>
+				<h2>Qualité de la donnée</h2>
+				<!-- besoin de faire de la normalisation de données au vol et en batch -->
+				<!-- impact sur la politique d'écriture -->
+			</section>
+			<section>
+				<h2>Présentation des données</h2>
+				<!-- utilisation d'index extérieur -->
+				<!-- création de cluster spécifiques pour des clients -->
+				<!-- possibilité d'utiliser des vues matérialisées -->
 			</section>
 
 			<section>
