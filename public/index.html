@@ -171,6 +171,26 @@ CREATE TABLE station (
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
 				</section>
 				<section>
+					<h2>Requêtes</h2>
+					<pre>
+					<code data-trim>
+SELECT *
+FROM station
+WHERE zone = 'ZONE1'
+  AND day = 1234
+  AND station_id = 'station1'
+  AND event_time = 123456789; // -> OK
+
+SELECT *
+FROM station
+WHERE zone = 'ZONE1'
+	AND station_id = 'station1'
+	AND event_time = 123456789; // -> KO
+</code>
+					</pre>
+					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
+				</section>
+				<section>
 					<h2>Clef de partitionnement</h2>
 					<ul>
 						<li>Doit être invariant et déductible pour une donnée</li>
@@ -263,7 +283,16 @@ VALUES (
 						<li>Apache Cassandra n'est pas élatique !</li>
 						<li>1 seul nœud c'est mal</li>
 						<li>beaucoup de resources</li>
-						<li>++ Facile à déployer</li>
+						<li>Master/Master ? P2P !</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Consistence des données</h2>
+					<ul>
+						<li><code>ONE</code></li>
+						<li><code>QUORUM</code></li>
+						<li><code>ALL</code></li>
+						<li>versions locales au DC, ex: <code>LOCAL_QUORUM</code></li>
 					</ul>
 				</section>
 				<!-- description de l'organisation du cluster, du facteur de réplication -->
@@ -304,15 +333,6 @@ VALUES (
 						</li>
 					</ol>
 				</section>
-				<section>
-					<h2>Consistence des données</h2>
-					<ul>
-						<li><code>ONE</code></li>
-						<li><code>QUORUM</code></li>
-						<li><code>ALL</code></li>
-						<li>versions locales au DC, ex: <code>LOCAL_QUORUM</code></li>
-					</ul>
-				</section>
 			</section>
 
 			<section>
@@ -320,18 +340,6 @@ VALUES (
 					<h2>Requêter autrement</h2>
 					<ul>
 						<li>Accéder à tous les relevés dans une certaine zone</li>
-					</ul>
-				</section>
-				<section>
-					<ul>
-						<li>Vue matérialisée</li>
-						<li>
-							Index externe, moteur de recherche
-							<ul>
-								<li>Elastic Search, Apache Solr, Apache Lucene, ...</li>
-								<li><em>Limites</em> des clés de Cassandra</li>
-							</ul>
-						</li>
 					</ul>
 				</section>
 				<section>
@@ -347,18 +355,18 @@ WITH comment = 'Based on table station' ;
 	</code>
 </pre>
 				</section>
+				<section>
+					<h2>Index externe</h2>
+					<ul>
+						<li>Elastic Search, Apache Solr, Apache Lucene, ...</li>
+						<li><em>Limites</em> des clés de Cassandra</li>
+					</ul>
+				</section>
 			</section>
 
 			<section>
                 <section>
-                    <h2>Mise à disposition des données</h2>
-                    <ul>
-                        <li>Garantie d'accès aux clients importants</li>
-                        <li>Sandbox pour expérimentations</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Duplication Cluster</h2>
+                    <h2>Vous en voulais plus ?</h2>
                     <ul>
                         <li>
                             Clusters "premium" ou dédiés
