@@ -10,6 +10,42 @@
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/solarized-light.min.css">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script>
+	<script>
+		// Automatic fragment numbering
+var fragmentNumbering = function ( event ) {
+  var fragments = $(event.currentSlide).find('.fragment');
+  var order = new Array(fragments.length);
+  
+  $(fragments).filter('[data-index]').each( function () { 
+    var index = parseInt($(this).attr('data-index')) - 1;
+    if (index < 0 || index >= order.length) {
+      alert('Invalid data-index: ' + index);
+      return;
+    }
+    if (typeof order[index] == 'undefined') {
+      order[index] = [ $(this) ];
+    } else {
+      order[index].push($(this));
+    }
+  });
+  
+  var index = 0;
+  $(fragments).not('[data-index]').each( function () {
+    while(typeof order[index] != 'undefined') {
+      index = index + 1;
+    }
+    order[index] = [ $(this) ];
+  });
+  
+  $(order).each( function (index) {
+    $(this).each( function () { 
+      $(this).attr('data-fragment-index', index);
+    })
+  });
+};
+Reveal.addEventListener('ready', fragmentNumbering);
+Reveal.addEventListener('slidechanged', fragmentNumbering);
+	</script>
 </head>
 
 <body>
@@ -97,15 +133,8 @@
 				<section>
 					<h2>Principales requètes</h2>
 					<ul>
-						<li>Quelles sont les données reçues hier dans le bassin grenoblois ?</li>
-						<li>Quelles sont les données reçues depuis une central reçues hier dans le bassin grenoblois ?</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Principales requètes</h2>
-					<ul>
-						<li>Quelles sont les données reçues <span class="highlight-blue">hier</span> dans le <span class="highlight-blue">bassin grenoblois</span> ? <span class="highlight-red">70 %</span></li>
-						<li>Quelles sont les données reçues depuis une central reçues <span class="highlight-blue">hier</span> dans le <span class="highlight-blue">bassin grenoblois</span> ? <span class="highlight-red">30 %</span></li>
+						<li>Quelles sont les données reçues <span class="fragment highlight-blue" data-fragment-index=3>hier</span> dans le <span class="fragment highlight-blue" data-fragment-index=3>bassin grenoblois</span> ? <span class="fragment highlight-red" data-fragment-index=3>70 %</span></li>
+						<li>Quelles sont les données reçues depuis une central reçues <span class="fragment highlight-blue" data-fragment-index=3>hier</span> dans le <span class="fragment highlight-blue" data-fragment-index=3>bassin grenoblois</span> ? <span class="fragment highlight-red" data-fragment-index=3>30 %</span></li>
 					</ul>
 				</section>
 				<section>
@@ -181,9 +210,21 @@ CREATE TABLE station (
 
 	PRIMARY KEY((zone, day), station_id, event_time)
 );
+</code>
+</pre>
+</section>
+<section>
+<pre>
+	<code>
 
 INSERT INTO mykeyspace.stations (zone, day, station_id, event_time)
-VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
+VALUES (
+	'A',
+	15,
+	'station456',
+	123456789,
+	{'pressure':12,hygrometry:4}
+);
 						</code>
 					</pre>
 				</section>
