@@ -97,8 +97,15 @@
 				<section>
 					<h2>Principales requètes</h2>
 					<ul>
-						<li>Quelles sont les données reçues <span class="fragment highlight-blue">hier</span> dans le <span class="fragment highlight-blue">bassin grenoblois</span> ? <span class="fragment">70 %</span></li>
-						<li>Quelles sont les données reçues depuis une central reçues <span class="fragment highlight-blue">hier</span> dans le <span class="fragment highlight-blue">bassin grenoblois</span> ? <span class="fragment">30 %</span></li>
+						<li>Quelles sont les données reçues hier dans le bassin grenoblois ?</li>
+						<li>Quelles sont les données reçues depuis une central reçues hier dans le bassin grenoblois ?</li>
+					</ul>
+				</section>
+				<section>
+					<h2>Principales requètes</h2>
+					<ul>
+						<li>Quelles sont les données reçues <span class="highlight-blue">hier</span> dans le <span class="highlight-blue">bassin grenoblois</span> ? <span class="highlight-red">70 %</span></li>
+						<li>Quelles sont les données reçues depuis une central reçues <span class="highlight-blue">hier</span> dans le <span class="highlight-blue">bassin grenoblois</span> ? <span class="highlight-red">30 %</span></li>
 					</ul>
 				</section>
 				<section>
@@ -108,20 +115,28 @@
 						<li><b>CLUSTERING KEY</b> identification au sein de la partition</li>
 					</ul>
 					<pre>
-					<code data-trim>PRIMARY KEY((zone, day), station_id, event_time)</code>
+					<code data-trim>
+CREATE TABLE station (
+	zone text,
+	day int,
+	station_id text,
+	event_time timestamp,
+	sensor1 sensor,
+
+	PRIMARY KEY((zone, day), station_id, event_time)
+);</code>
 					</pre>
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
 				</section>
 				<section>
-					<h2>Choix d'une clef de partitionnement</h2>
+					<h2>Clef de partitionnement</h2>
 					<ul>
-						<li>Doit être invariant pour une donnée</li>
+						<li>Doit être invariant et déductible pour une donnée</li>
 						<li>Doit discriminer correctement les données</li>
-						<li>Devrait permettre une colocalisation des accès/traitement</li>
+						<li>Devrait permettre une colocalisation des accès/traitements</li>
 					</ul>
 				</section>
 				<section>
-					<h2></h2>
 					Difficulté de connaître les requêtes à l'avance
 					<ul>
 						<li class="fragment">Monitorer</li>
@@ -156,14 +171,15 @@ CREATE TYPE sensor (
 	pressure int,
 	hygrometry int
 );
+
 CREATE TABLE station (
 	zone text,
 	day int,
 	station_id text,
-	station_id timestamp,
+	event_time timestamp,
 	sensor1 sensor,
 
-	PRIMARY KEY((zone, day), station_id)
+	PRIMARY KEY((zone, day), station_id, event_time)
 );
 
 INSERT INTO mykeyspace.stations (zone, day, station_id, event_time)
@@ -176,8 +192,6 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 			<section>
 				<section>
 					<h2>Déploiement</h2>
-					<!-- besoin -->
-					<h3>Besoin</h3>
 					<ul>
 						<li>Haute disponibilité</li>
 						<li>Gros volume de données (rétention infinies, centaines de stations)</li>
@@ -199,24 +213,10 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 				</section>
 				<!-- description de l'organisation du cluster, du facteur de réplication -->
 			</section>
-			<section>
-				<h2>Qualité de la donnée</h2>
-				<!-- besoin de faire de la normalisation de données au vol et en batch -->
-				<!-- impact sur la politique d'écriture -->
-			</section>
-			<section>
-				<h2>Présentation des données</h2>
-				<!-- utilisation d'index extérieur -->
-				<!-- création de cluster spécifiques pour des clients -->
-				<!-- possibilité d'utiliser des vues matérialisées -->
-			</section>
 
 			<section>
 				<section>
-					<h1>4. Qualité de la donnée</h1>
-				</section>
-				<section>
-					<h2>Besoins:</h2>
+					<h2>Qualité de la donnée</h2>
 					<ul>
 						<li>
 							Normalisation des données
@@ -228,7 +228,6 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 					</ul>
 				</section>
 				<section>
-					<h2>Solution:</h2>
 					<ol>
 						<li>
 							Pre-processing
@@ -243,7 +242,6 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 							<ul>
 								<li>Affinage des données</li>
 								<li>En tâche de fond</li>
-								<li></li>
 								<li>&rArr; Spark</li>
 							</ul>
 						</li>
@@ -262,16 +260,12 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 
 			<section>
 				<section>
-					<h1>5. Requêter autrement</h1>
-				</section>
-				<section>
-					<h2>Besoins:</h2>
+					<h2>Requêter autrement</h2>
 					<ul>
 						<li>Accéder à tous les relevés dans une certaine zone</li>
 					</ul>
 				</section>
 				<section>
-					<h2>Solution:</h2>
 					<ul>
 						<li>Vue matérialisée</li>
 						<li>
@@ -285,26 +279,29 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 				</section>
 				<section>
 					<h2>Vue matérialisée</h2>
-
+<pre>
+	<code>
+CREATE MATERIALIZED VIEW station_by_type
+AS SELECT type, zone, station_id
+FROM station
+WHERE type IS NOT NULL
+PRIMARY KEY (type, zone)
+WITH comment = 'Based on table station' ;
+	</code>
+</pre>
 				</section>
-
-
 			</section>
 
-
 			<section>
-				<section>
-					<h1>6. Duplication Cluster</h1>
-				</section>
                 <section>
-                    <h2>Besoins:</h2>
+                    <h2>Mise à disposition des données</h2>
                     <ul>
-                        <li>Garantie d'accès aux client importants</li>
+                        <li>Garantie d'accès aux clients importants</li>
                         <li>Sandbox pour expérimentations</li>
                     </ul>
                 </section>
                 <section>
-                    <h2>Solution:</h2>
+                    <h2>Duplication Cluster</h2>
                     <ul>
                         <li>
                             Clusters "premium" ou dédiés
@@ -326,10 +323,7 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 
 			<!-- conclusion -->
 			<section>
-				<h2>Pro/Cons</h2>
-				<!-- base de données très particulière -->
-				<!-- parler d'iCloud ici ? -->
-				<!-- rex -->
+				<a href="http://blog.viseo-bt.com/datastax-day-paris-2016/">Datastax day paris 2016</a>
 			</section>
 		</div>
 	</div>
