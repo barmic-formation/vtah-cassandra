@@ -65,7 +65,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 					<h4 style="font-size: xx-large">Michel Barret, Pierre Bourret</h4>
 					<h4 style="font-size: xx-large">&mdash; Viseo Technologies &mdash;</h4>
 					<br>
-					<img src="viseotechanhour.png">
+					<img src="img/viseotechanhour.png">
 				</section>
 
 				<section>
@@ -91,7 +91,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 
 				<section>
 					<h2>Apache Cassandra</h2>
-					<img src="cassandra-logo.png" class="plain" width="300">
+					<img src="img/cassandra-logo.png" class="plain" width="300">
 					<p tagcloud>
 						Large row
 						Peer to Peer
@@ -115,7 +115,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 			<section>
 				<section>
 					<!--h2>Recueillir les données de toutes les stations météo du territoire</h2-->
-					<img class="stretch" src="station-meteo.jpg" />
+					<img class="stretch" src="img/station-meteo.jpg" />
 					<!--
 						- satélite
 						- bouée
@@ -129,7 +129,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 				</section>
 
 				<section>
-					<img class="stretch" src="diagram.png" />
+					<img class="stretch" src="img/diagram.png" />
 				</section>
 
 				<section>
@@ -293,10 +293,10 @@ VALUES (
 				</section>
 				<!-- Dessin d'un cluster -->
 				<section>
-					<img class="stretch" src="cluster.svg" />
+					<img class="stretch" src="img/cluster.svg" />
 				</section>
 				<section>
-					<img class="stretch" src="france.svg" />
+					<img class="stretch" src="img/france.svg" />
 				</section>
 				<section>
 					<ul>
@@ -409,7 +409,7 @@ WITH comment = 'Based on table station' ;
 			<!-- conclusion -->
 			<section>
 				<section>
-					<img src="datastax-logo.png" class="plain" width="400">
+					<img src="img/datastax-logo.png" class="plain" width="400">
 					<br>
 					<br>
 					<ul>
@@ -431,26 +431,26 @@ WITH comment = 'Based on table station' ;
 					<br>
 					<table class="custom center">
 						<tr>
-							<td><img class="plain" src="apple.png" height="150"></td>
-							<td><img class="plain" src="netflix.png"></td>
-							<td><img class="plain" src="walmart.png"></td>
+							<td><img class="plain" src="img/apple.png" height="150"></td>
+							<td><img class="plain" src="img/netflix.png"></td>
+							<td><img class="plain" src="img/walmart.png"></td>
 						</tr>
 						<tr>
-							<td><img class="plain" src="sony.png"></td>
-							<td><img class="plain" src="ubs.png"></td>
-							<td><img class="plain" src="mcdonalds.png" height="180"></td>
+							<td><img class="plain" src="img/sony.png"></td>
+							<td><img class="plain" src="img/ubs.png"></td>
+							<td><img class="plain" src="img/mcdonalds.png" height="180"></td>
 						</tr>
 					</table>
 				</section>
 
 				<section>
 					<h1>Questions</h1>
-					<img src="question.png" class="plain">
+					<img src="img/question.png" class="plain">
 				</section>
 
 				<section>
 					<h1>Merci !</h1>
-					<img src="applause.gif" class="plain" height="350">
+					<img src="img/applause.gif" class="plain" height="350">
 				</section>
 
 				<section>
@@ -467,6 +467,7 @@ WITH comment = 'Based on table station' ;
 		// Required, even if empty.
 		Reveal.initialize({
             dependencies: [
+                { src: 'plugin/notes/notes.js', async: true },
                 { src: 'plugin/tagcloud/tagcloud.js', async: true }
             ],
             // slideNumber: 'c/t', // Absolute slide numbers (with total).
