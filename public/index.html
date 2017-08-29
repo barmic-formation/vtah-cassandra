@@ -328,6 +328,9 @@ VALUES ('A', 15, 'station456', 123456789, {'pressure':12,hygrometry:4});
 	<script>
 		// Required, even if empty.
 		Reveal.initialize({
+            dependencies: [
+                { src: 'plugin/tagcloud/tagcloud.js', async: true }
+            ],
             // slideNumber: 'c/t', // Absolute slide numbers (with total).
             slideNumber: true, // Enable hierarchical slide numbers
             history: true // Enable slide number in URL fragment
