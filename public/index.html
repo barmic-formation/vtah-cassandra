@@ -439,6 +439,7 @@ WITH comment = 'Based on table station' ;
 		// Required, even if empty.
 		Reveal.initialize({
             dependencies: [
+                { src: 'plugin/notes/notes.js', async: true },
                 { src: 'plugin/tagcloud/tagcloud.js', async: true }
             ],
             // slideNumber: 'c/t', // Absolute slide numbers (with total).
