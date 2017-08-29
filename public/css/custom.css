@@ -11,3 +11,9 @@
 .todo::before {
     content: '// TODO ';
 }
+
+/* Table with no border */
+table.custom td {
+    text-align: center;
+    border-bottom: 0;
+}
