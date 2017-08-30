@@ -174,9 +174,8 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 
 			<!-- Partie 4 - Présentation de la solution -->
 			<section>
-				<!-- Part 1 -->
 				<section>
-					<h2>Principales requètes</h2>
+					<h2>Principales requêtes</h2>
 					<ul>
 						<li>Quelles sont les données reçues <span class="fragment highlight-blue" data-fragment-index=3>hier</span> dans le
 							<span class="fragment highlight-blue" data-fragment-index=3>bassin grenoblois</span> ?
@@ -249,10 +248,12 @@ WHERE zone = 'ZONE1'
 					</ul>
 				</section>
 				<section>
-					Difficulté de connaître les requêtes à l'avance
+					<img class="plain" src="img/warning.png" height="250">
+					<h3>Difficulté de connaître les requêtes à l'avance</h3>
 					<ul>
-						<li class="fragment">Monitorer</li>
-						<li class="fragment">Rester ouvert aux changements</li>
+						<li class="fragment"><em>Monitorer</em>: usages, performances, shards</li>
+						<li class="fragment">Rester ouvert aux <em>changements</em></li>
+						<li class="fragment"><em>Toujours respecter les contraintes de clé primaire</em></li>
 					</ul>
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
 				</section>
@@ -416,7 +417,7 @@ WITH comment = 'Based on table station' ;
 
 			<section>
                 <section>
-                    <h2>Vous en voulais plus ?</h2>
+                    <h2>Vous en voulez plus ?</h2>
                     <ul>
                         <li>
                             Clusters "premium" ou dédiés
