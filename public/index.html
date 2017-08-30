@@ -67,6 +67,9 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 					<h4 style="font-size: xx-large">&mdash; Viseo Technologies &mdash;</h4>
 					<br>
 					<img src="img/viseotechanhour.png">
+					<aside class="notes">
+						<h2>Qui?</h2>
+					</aside>
 				</section>
 
 				<section>
@@ -78,6 +81,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 						<li class="fragment grow highlight-blue">Retour d'expérience</li>
 					</ul>
 					<aside class="notes">
+						<h2>Qui?</h2>
 						Objectifs du Tech an hour:
 						<ol>
 							<li><em>Découvrir</em> une techno. Pas le temps d'approfondir.</li>
@@ -109,6 +113,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 						#Elastic
 					</p>
 					<aside class="notes">
+						<h2>Qui?</h2>
 						TODO
 					</aside>
 				</section>
@@ -143,6 +148,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 						</li>
 					</ul>
 					<aside class="notes">
+						<h2>Qui?</h2>
 						TODO
 						<!--h2>Recueillir les données de toutes les stations météo du territoire</h2-->
 						<!--
@@ -160,6 +166,10 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 
 				<section>
 					<img class="stretch" src="img/diagram.png" />
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 
 				<section>
@@ -169,6 +179,10 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 						<li>volumétrie</li>
 						<li>hétérogénéité des données</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 			</section>
 
@@ -184,6 +198,10 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 							dans le <span class="fragment highlight-blue" data-fragment-index=3>bassin grenoblois</span> ?
 							<span class="fragment highlight-red" data-fragment-index=3>30 %</span></li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<h2>vocabulaire</h2>
@@ -191,6 +209,10 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 					<!--video class="stretch" utoplay="true" controls="controls">
 						<source src="video/cake.mp4" type="video/mp4" />
 					</video-->
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<h2>vocabulaire</h2>
@@ -198,6 +220,10 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 					<video id="Video1" onshow="vidplay()" class="stretch" loop autoplay="true">
 						<source src="video/cake.mp4" type="video/mp4" />
 					</video>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<h2>Choix de la clef</h2>
@@ -217,7 +243,11 @@ CREATE TABLE station (
 	PRIMARY KEY((zone, day), station_id, event_time)
 );</code>
 					</pre>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
+					</aside>
 				</section>
 				<section>
 					<h2>Requêtes</h2>
@@ -237,7 +267,11 @@ WHERE zone = 'ZONE1'
 	AND event_time = 123456789; // -> KO
 </code>
 					</pre>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
+					</aside>
 				</section>
 				<section>
 					<h2>Clef de partitionnement</h2>
@@ -246,6 +280,10 @@ WHERE zone = 'ZONE1'
 						<li>Doit discriminer correctement les données</li>
 						<li>Devrait permettre une colocalisation des accès/traitements</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<img class="plain" src="img/warning.png" height="250">
@@ -255,7 +293,11 @@ WHERE zone = 'ZONE1'
 						<li class="fragment">Rester ouvert aux <em>changements</em></li>
 						<li class="fragment"><em>Toujours respecter les contraintes de clé primaire</em></li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
 					<!-- description de la clef composite, de son impact, du sharding que ça décrit -->
+					</aside>
 				</section>
 			</section>
 
@@ -267,7 +309,11 @@ WHERE zone = 'ZONE1'
 						<li>grand nombre de capteurs différents</li>
 						<li>stockage d'image</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
 					<!-- expliquer que l'on utilise une colonne par capteur et pas par type de capteur, on peut mettre une grosse image dans une colonne sans souci -->
+					</aside>
 				</section>
 				<section>
 					<p>Stocker les données de chaque capteurs dans une colonne</p>
@@ -276,6 +322,10 @@ WHERE zone = 'ZONE1'
 						<li>les <i>User Defined Type</i> permettent de stocker des données complexes</li>
 						<li>chaque cellule peut stocker jusqu'à 2Gio</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<pre>
@@ -296,6 +346,10 @@ CREATE TABLE station (
 );
 </code>
 </pre>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 </section>
 <section>
 <pre>
@@ -311,6 +365,10 @@ VALUES (
 );
 						</code>
 					</pre>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 			</section>
 
@@ -321,13 +379,25 @@ VALUES (
 						<li>Haute disponibilité</li>
 						<li>Gros volume de données (rétention infinies, centaines de stations)</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<!-- Dessin d'un cluster -->
 				<section>
 					<img class="stretch" src="img/cluster.svg" />
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<img class="stretch" src="img/france.svg" />
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<ul>
@@ -336,6 +406,10 @@ VALUES (
 						<li>beaucoup de resources</li>
 						<li>Master/Master ? P2P !</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<h2>Consistence des données</h2>
@@ -345,6 +419,10 @@ VALUES (
 						<li><code>ALL</code></li>
 						<li>versions locales au DC, ex: <code>LOCAL_QUORUM</code></li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<!-- description de l'organisation du cluster, du facteur de réplication -->
 			</section>
@@ -361,6 +439,10 @@ VALUES (
 							</ul>
 						</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<ol>
@@ -383,6 +465,10 @@ VALUES (
 							</ul>
 						</li>
 					</ol>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 			</section>
 
@@ -392,6 +478,10 @@ VALUES (
 					<ul>
 						<li>Accéder à tous les relevés dans une certaine zone</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<h2>Vue matérialisée</h2>
@@ -405,6 +495,10 @@ PRIMARY KEY (type, zone)
 WITH comment = 'Based on table station' ;
 	</code>
 </pre>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 				<section>
 					<h2>Index externe</h2>
@@ -412,6 +506,10 @@ WITH comment = 'Based on table station' ;
 						<li>Elastic Search, Apache Solr, Apache Lucene, ...</li>
 						<li><em>Limites</em> des clés de Cassandra</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 			</section>
 
@@ -434,6 +532,10 @@ WITH comment = 'Based on table station' ;
 							</ul>
 						</li>
                     </ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
                 </section>
 			</section>
 
@@ -455,6 +557,10 @@ WITH comment = 'Based on table station' ;
 							<a href="http://blog.viseo-bt.com/datastax-day-paris-2016/">http://blog.viseo-bt.com/datastax-day-paris-2016/</a>
 						</li>
 					</ul>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 
 				<section>
@@ -472,21 +578,37 @@ WITH comment = 'Based on table station' ;
 							<td><img class="plain" src="img/mcdonalds.png" height="180"></td>
 						</tr>
 					</table>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 
 				<section>
 					<h1>Questions</h1>
 					<img src="img/question.png" class="plain">
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 
 				<section>
 					<h1>Merci !</h1>
 					<img src="img/applause.gif" class="plain" height="350">
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 
 				<section>
 					<h2>Au prochain épisode...</h2>
 					<img class="plain stretch" src="img/flyer_securite_head.png">
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
 				</section>
 			</section>
 		</div>
