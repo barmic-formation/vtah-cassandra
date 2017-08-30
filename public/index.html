@@ -80,6 +80,28 @@
 						TODO
 					</aside>
 				</section>
+				<section>
+					<h2>Cluster</h2>
+					<img class="stretch" src="img/clustering.png" />
+					<!--video class="stretch" utoplay="true" controls="controls">
+						<source src="video/cake.mp4" type="video/mp4" />
+					</video-->
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
+				</section>
+				<section>
+					<h2>Partitionnement</h2>
+					<!--img class="stretch" src="img/clustering.png" /-->
+					<video id="Video1" onshow="vidplay()" class="stretch" loop autoplay="true">
+						<source src="video/cake.mp4" type="video/mp4" />
+					</video>
+					<aside class="notes">
+						<h2>Qui?</h2>
+						TODO
+					</aside>
+				</section>
 			</section>
 
 			<!-- Partie 3 - Présentation du cas d'utilisation -->
@@ -135,7 +157,6 @@
 						TODO
 					</aside>
 				</section>
-
 			</section>
 
 			<!-- Partie 4 - Présentation de la solution -->
@@ -156,35 +177,15 @@
 					</aside>
 				</section>
 				<section>
-					<h2>vocabulaire</h2>
-					<img class="stretch" src="img/clustering.png" />
-					<!--video class="stretch" utoplay="true" controls="controls">
-						<source src="video/cake.mp4" type="video/mp4" />
-					</video-->
-					<aside class="notes">
-						<h2>Qui?</h2>
-						TODO
-					</aside>
-				</section>
-				<section>
-					<h2>vocabulaire</h2>
-					<!--img class="stretch" src="img/clustering.png" /-->
-					<video id="Video1" onshow="vidplay()" class="stretch" loop autoplay="true">
-						<source src="video/cake.mp4" type="video/mp4" />
-					</video>
-					<aside class="notes">
-						<h2>Qui?</h2>
-						TODO
-					</aside>
-				</section>
-				<section>
-					<h2>Choix de la clef</h2>
+					<h2>Clef primaire</h2>
 					<ul>
 						<li><b>PARTITION KEY</b></li>
 						<li><b>CLUSTERING KEY</b> identification au sein de la partition</li>
 					</ul>
 					<pre>
 					<code data-trim>
+// implémentation
+
 CREATE TABLE station (
 	zone text,
 	day int,
@@ -192,7 +193,7 @@ CREATE TABLE station (
 	event_time timestamp,
 	sensor1 sensor,
 
-	PRIMARY KEY((zone, day), station_id, event_time)
+	PRIMARY KEY(<span style="color: #1b91ff!">(zone, day)</span>, station_id, event_time)
 );</code>
 					</pre>
 					<aside class="notes">
@@ -228,9 +229,9 @@ WHERE zone = 'ZONE1'
 				<section>
 					<h2>Clef de partitionnement</h2>
 					<ul>
-						<li>Doit être invariant et déductible pour une donnée</li>
-						<li>Doit discriminer correctement les données</li>
-						<li>Devrait permettre une colocalisation des accès/traitements</li>
+						<li>Doit être invariable et déductible</li>
+						<li>Doit discriminer</li>
+						<li>Devrait être métier</li>
 					</ul>
 					<aside class="notes">
 						<h2>Qui?</h2>
