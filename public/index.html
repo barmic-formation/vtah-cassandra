@@ -270,9 +270,10 @@ WHERE zone = 'ZONE1'
 					</aside>
 				</section>
 				<section>
+					<h2>Structure d'une table</h2>
 					<p>Stocker les données de chaque capteurs dans une colonne</p>
 					<ul>
-						<li>cassandra propose jusqu'à 2 milliards de colonnes par partition</li>
+						<li>cassandra propose jusqu'à 2 milliards de cellules par partition</li>
 						<li>les <i>User Defined Type</i> permettent de stocker des données complexes</li>
 						<li>chaque cellule peut stocker jusqu'à 2Gio</li>
 					</ul>
@@ -282,6 +283,7 @@ WHERE zone = 'ZONE1'
 					</aside>
 				</section>
 				<section>
+					<h2>User Defined Type</h2>
 					<pre>
 						<code>
 CREATE TYPE sensor (
@@ -306,6 +308,7 @@ CREATE TABLE station (
 					</aside>
 </section>
 <section>
+		<h2>User Defined Type</h2>
 <pre>
 	<code>
 
@@ -341,6 +344,7 @@ VALUES (
 				</section>
 				<!-- Dessin d'un cluster -->
 				<section>
+					<h2>Cluster</h2>
 					<img class="stretch" src="img/cluster.svg" />
 					<aside class="notes">
 						<h2>Qui?</h2>
@@ -348,10 +352,11 @@ VALUES (
 					</aside>
 				</section>
 				<section>
+					<h2>Cluster</h2>
 					<img class="stretch" src="img/france.svg" />
 					<aside class="notes">
 						<h2>Qui?</h2>
-						TODO
+						Requêtes asynchrones
 					</aside>
 				</section>
 				<section>
