@@ -17,40 +17,6 @@
 				video.play();
 			}
 		}
-		// Automatic fragment numbering
-var fragmentNumbering = function ( event ) {
-  var fragments = $(event.currentSlide).find('.fragment');
-  var order = new Array(fragments.length);
-  
-  $(fragments).filter('[data-index]').each( function () { 
-    var index = parseInt($(this).attr('data-index')) - 1;
-    if (index < 0 || index >= order.length) {
-      alert('Invalid data-index: ' + index);
-      return;
-    }
-    if (typeof order[index] == 'undefined') {
-      order[index] = [ $(this) ];
-    } else {
-      order[index].push($(this));
-    }
-  });
-  
-  var index = 0;
-  $(fragments).not('[data-index]').each( function () {
-    while(typeof order[index] != 'undefined') {
-      index = index + 1;
-    }
-    order[index] = [ $(this) ];
-  });
-  
-  $(order).each( function (index) {
-    $(this).each( function () { 
-      $(this).attr('data-fragment-index', index);
-    })
-  });
-};
-Reveal.addEventListener('ready', fragmentNumbering);
-Reveal.addEventListener('slidechanged', fragmentNumbering);
 	</script>
 </head>
 
@@ -341,13 +307,14 @@ CREATE TABLE station (
 <pre>
 	<code>
 
-INSERT INTO mykeyspace.stations (zone, day, station_id, event_time)
+INSERT INTO mykeyspace.stations (zone, day, station_id,
+                                 event_time)
 VALUES (
 	'A',
 	15,
 	'station456',
 	123456789,
-	{'pressure':12,hygrometry:4}
+	{'pressure':12,'hygrometry':4}
 );
 						</code>
 					</pre>
@@ -613,6 +580,40 @@ WITH comment = 'Based on table station' ;
             slideNumber: true, // Enable hierarchical slide numbers
             history: true // Enable slide number in URL fragment
 		});
+		// Automatic fragment numbering
+var fragmentNumbering = function ( event ) {
+  var fragments = $(event.currentSlide).find('.fragment');
+  var order = new Array(fragments.length);
+  
+  $(fragments).filter('[data-index]').each( function () { 
+    var index = parseInt($(this).attr('data-index')) - 1;
+    if (index < 0 || index >= order.length) {
+      alert('Invalid data-index: ' + index);
+      return;
+    }
+    if (typeof order[index] == 'undefined') {
+      order[index] = [ $(this) ];
+    } else {
+      order[index].push($(this));
+    }
+  });
+  
+  var index = 0;
+  $(fragments).not('[data-index]').each( function () {
+    while(typeof order[index] != 'undefined') {
+      index = index + 1;
+    }
+    order[index] = [ $(this) ];
+  });
+  
+  $(order).each( function (index) {
+    $(this).each( function () { 
+      $(this).attr('data-fragment-index', index);
+    })
+  });
+};
+Reveal.addEventListener('ready', fragmentNumbering);
+Reveal.addEventListener('slidechanged', fragmentNumbering);
 	</script>
 </body>
 </html>

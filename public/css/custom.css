@@ -17,3 +17,7 @@ table.custom td {
     text-align: center;
     border-bottom: 0;
 }
+
+.reveal pre code {
+    font-size: 25px;
+}
