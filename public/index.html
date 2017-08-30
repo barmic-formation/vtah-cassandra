@@ -57,6 +57,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 <body>
 	<div class="reveal">
 		<div class="slides">
+			<!-- Partie 1 - Intro -->
 			<section>
 				<section>
 					<h1>Cassandra</h1>
@@ -78,54 +79,83 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 					</ul>
 					<aside class="notes">
 						Objectifs du Tech an hour:
-						1. Découvrir une techno. Pas le temps d'approfondir.
-						2. Comment l'utiliser sur un cas "réel", simplifié pour l'exemple.
-						3. Comment elle nous a servi? Ce qu'on en retient de bien, de moins bien.
+						<ol>
+							<li><em>Découvrir</em> une techno. Pas le temps d'approfondir.</li>
+							<li><em>Appliquer</em> sur un cas "réel". simplifié pour l'exemple.</li>
+							<li><em>Partager</em> l'expérience. Comment elle nous a servi? Ce qu'on en retient de bien, de moins bien</li>
+						</ol>
 					</aside>
 				</section>
 			</section>
 
-			<!-- Démarrage -->
+			<!-- Partie 2 - Présentation globale Cassandra -->
 			<section>
-
-
 				<section>
 					<h2>Apache Cassandra</h2>
 					<img src="img/cassandra-logo.png" class="plain" width="300">
 					<p tagcloud>
-						Large row
-						Peer to Peer
-						Decentralized
-						Scalability
-						Fault tolerant
-						Replication
-						Multi data-center
-						High Availability
-						Made for Facebook
-						NoSQL
-						Performant
-						Durable
-						Elastic
+						#Large row
+						#Peer to Peer
+						#Decentralized
+						#Scalability
+						#Fault tolerant
+						#Replication
+						#Multi data-center
+						#High Availability
+						#Made for Facebook
+						#NoSQL
+						#Performant
+						#Durable
+						#Elastic
 					</p>
+					<aside class="notes">
+						TODO
+					</aside>
 				</section>
 			</section>
 
-			<!-- Présentation du cas -->
-
+			<!-- Partie 3 - Présentation du cas d'utilisation -->
 			<section>
 				<section>
-					<!--h2>Recueillir les données de toutes les stations météo du territoire</h2-->
-					<img class="stretch" src="img/station-meteo.jpg" />
-					<!--
+					<h2>Fournisseur de données météo</h2>
+					<table class="custom center">
+						<tr>
+							<td><img src="img/station-meteo.jpg"/></td>
+							<td><img src="img/station-meteo2.jpg"></td>
+							<td><img src="img/station-meteo3.png"></td>
+							<td><img src="img/station-meteo-sea.jpg"/></td>
+							<td><img src="img/meteosat.jpg"/></td>
+						</tr>
+					</table>
+
+					<ul>
+						<li>
+							<em>Divers</em> capteurs
+							<span class="fragment" style="color: red;" data-fragment-index="1">&rArr; Données hétérogènes</span>
+						</li>
+						<li>
+							<em>Large</em> couverture
+							<span class="fragment" style="color: red;" data-fragment-index="1">&rArr; Données nombreuses</span>
+						</li>
+						<li>
+							<em>Longue</em> conservation
+							<span class="fragment" style="color: red;" data-fragment-index="1">&rArr; Données <u>très</u> nombreuses</span>
+						</li>
+					</ul>
+					<aside class="notes">
+						TODO
+						<!--h2>Recueillir les données de toutes les stations météo du territoire</h2-->
+						<!--
 						- satélite
 						- bouée
 						- station mobile (bateau)
-					-->
-					<!--
-						- point de rosée
-						- direction du vent
-						- pluviométrie
-					-->
+						-->
+						<!--
+                            - point de rosée
+                            - direction du vent
+                            - pluviométrie
+                        -->
+					</aside>
 				</section>
 
 				<section>
@@ -142,7 +172,7 @@ Reveal.addEventListener('slidechanged', fragmentNumbering);
 				</section>
 			</section>
 
-			<!-- Présentation de la solution -->
+			<!-- Partie 4 - Présentation de la solution -->
 			<section>
 				<!-- Part 1 -->
 				<section>
