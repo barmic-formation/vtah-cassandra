@@ -221,7 +221,7 @@ WHERE zone = 'ZONE1'
 					</aside>
 				</section>
 				<section>
-					<img class="plain" src="img/mandatory.png" height="200">
+					<img class="plain" src="img/mandatory.png" height="175" style="transform: rotate(90deg);">
 					<h2>Clef de partitionnement</h2>
 					<ul>
 						<li>Doit être invariable et déductible</li>
@@ -389,13 +389,19 @@ VALUES (
 
 			<section>
 				<section>
+					<img class="plain" src="img/quality.jpg" height="200">
 					<h2>Qualité de la donnée</h2>
 					<ul>
 						<li>
 							Normalisation des données
 							<ul>
-								<li>Alignement</li>
-								<li>Ajustements, corrections</li>
+								<li style="font-size: smaller">Alignement, ajustements, corrections</li>
+							</ul>
+						</li>
+						<li>
+							Données de plus haut niveau
+							<ul>
+								<li style="font-size: smaller">Analyse, synthèse</li>
 							</ul>
 						</li>
 					</ul>
@@ -404,30 +410,65 @@ VALUES (
 						TODO
 					</aside>
 				</section>
+
 				<section>
-					<ol>
-						<li>
-							Pre-processing
-							<ul>
-								<li>avant insertion dans Cassandra</li>
-								<li>hors-contexte</li>
-								<li>&rArr; <code>TRIGGER</code> (Java class)</li>
-								<li>pas forcément recommandé</li>
-							</ul>
-						</li>
-						<li>
-							Batch processing
-							<ul>
-								<li>Affinage des données</li>
-								<li>En tâche de fond</li>
-								<li>&rArr; Spark</li>
-								<li>Intégration très naturelle</li>
-							</ul>
-						</li>
-					</ol>
+					<h2>Pre-processing</h2>
+					<ul>
+						<li><em>avant</em> insertion dans Cassandra</li>
+						<li><em>hors-contexte</em></li>
+					</ul>
+					<br>
+					<br>
+					<h3 style="color: #1b91ff">&rArr; TRIGGER ?</h3>
 					<aside class="notes">
 						<h2>Pierre</h2>
-						→ Apparté Michel
+						TODO
+					</aside>
+				</section>
+
+				<section>
+					<h2>Trigger</h2>
+<pre><code style="font-size: larger; line-height: 150%">CREATE TRIGGER myTrigger ON mykeyspace.stations
+  USING 'com.viseo.techanhour.CassandraTrigger';
+</code></pre>
+<hr width="0">
+<pre><code style="font-size: x-large; line-height: 150%">package com.viseo.techanhour;
+import org.apache.cassandra.triggers.ITrigger;
+
+public class CassandraTrigger implements ITrigger {
+
+  @Overrides
+  public Collection&lt;Mutation&gt; augment(Partition update) {
+    //...
+  }
+}
+</code></pre>
+					<aside class="notes">
+						<h2>Pierre</h2>
+						<ul>
+							<li>Implémentation du trigger en <em>Java</em></li>
+							<li>JAR à déployer sur TOUS les noeuds</li>
+							<li>ne passe pas à l'échelle</li>
+							<li>pas forcément recommandé pour cet usage</li>
+							<li>d'autres cas plus adaptés au triggers</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Batch processing</h2>
+					<ul>
+						<li>en <em>arrière-plan</em></li>
+						<li>échantillons, vue d'ensemble</li>
+						<li><em>affinage</em> des données</li>
+					</ul>
+					<img class="plain fragment" src="img/spark.png" height="300">
+					<aside class="notes">
+						<h2>Pierre</h2>
+						Intégration très naturelle,
+						Duo gagnant pour le Big Data
+						<h2>→ Apparté Michel</h2>
+						Drivers Spark
 					</aside>
 				</section>
 			</section>
