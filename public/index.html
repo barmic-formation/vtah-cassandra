@@ -173,23 +173,21 @@
 				<section>
 					<h2>Clef primaire</h2>
 					<ul>
-						<li><b>PARTITION KEY</b></li>
-						<li><b>CLUSTERING KEY</b> identification au sein de la partition</li>
+						<li><b style="color: #1b91ff">PARTITION KEY</b>: localisation de la partition</li>
+						<li><b style="color: #09b660">CLUSTERING KEY</b>: identification au sein de la partition</li>
 					</ul>
-					<pre>
-					<code data-trim>
-// implémentation
+					<hr width="0">
+<pre><code data-trim>// Implémentation
 
 CREATE TABLE station (
 	zone text,
-	day int,
+	epochDay int,
 	station_id text,
 	event_time timestamp,
 	sensor1 sensor,
 
-	PRIMARY KEY(<span style="color: #1b91ff!">(zone, day)</span>, station_id, event_time)
-);</code>
-					</pre>
+    PRIMARY KEY(<b style="color: #1b91ff">(zone, epochDay)</b>, <b style="color: #09b660">station_id, event_time</b>)
+);</code></pre>
 					<aside class="notes">
 						<h2>Michel</h2>
 						TODO
@@ -203,7 +201,7 @@ CREATE TABLE station (
 SELECT *
 FROM station
 WHERE zone = 'ZONE1'
-  AND day = 1234
+  AND epochDay = 1234
   AND station_id = 'station1'
   AND event_time = 123456789; // -> OK
 
@@ -290,12 +288,12 @@ CREATE TYPE sensor (
 
 CREATE TABLE station (
 	zone text,
-	day int,
+	epochDay int,
 	station_id text,
 	event_time timestamp,
 	sensor1 sensor,
 
-	PRIMARY KEY((zone, day), station_id, event_time)
+	PRIMARY KEY((zone, epochDay), station_id, event_time)
 );
 </code>
 </pre>
@@ -309,7 +307,7 @@ CREATE TABLE station (
 <pre>
 	<code>
 
-INSERT INTO mykeyspace.stations (zone, day, station_id,
+INSERT INTO mykeyspace.stations (zone, epochDay, station_id,
                                  event_time)
 VALUES (
 	'A',
