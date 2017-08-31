@@ -101,7 +101,8 @@
 			<!-- Partie 3 - Présentation du cas d'utilisation -->
 			<section>
 				<section>
-					<h2>Fournisseur de données météo</h2>
+					<h2 style="color: #5d5d5d;">Exemple</h2>
+					<h3>Fournisseur de données météo</h3>
 					<table class="custom center">
 						<tr>
 							<td><img src="img/station-meteo.jpg"/></td>
@@ -196,22 +197,20 @@ CREATE TABLE station (
 				</section>
 				<section>
 					<h2>Requêtes</h2>
-					<pre>
-					<code data-trim>
-SELECT *
+					<h6 style="color: green">GOOD</h6>
+<pre><code data-trim>SELECT *
 FROM station
-WHERE zone = 'ZONE1'
-  AND epochDay = 1234
-  AND station_id = 'station1'
-  AND event_time = 123456789; // -> OK
+WHERE <b>zone</b> = 'ZONE1'
+  AND <b>epochDay</b> = 1234
+  AND <b>station_id</b> = 'station1'
+  AND <b>event_time</b> = 123456789;</code></pre>
 
-SELECT *
+<h6 style="color: crimson">BAD</h6><pre><code data-trim>SELECT *
 FROM station
-WHERE zone = 'ZONE1'
-	AND station_id = 'station1'
-	AND event_time = 123456789; // -> KO
-</code>
-					</pre>
+WHERE <b>zone</b> = 'ZONE1'
+  AND <b>station_id</b> = 'station1'
+  AND <b>event_time</b> = 123456789;
+</code></pre>
 					<aside class="notes">
 						<h2>Michel</h2>
 						TODO
@@ -219,12 +218,12 @@ WHERE zone = 'ZONE1'
 					</aside>
 				</section>
 				<section>
-					<img class="plain" src="img/mandatory.png" height="175" style="transform: rotate(90deg);">
+					<img class="plain" src="img/mandatory.png" height="125" style="transform: rotate(45deg);">
 					<h2>Clef de partitionnement</h2>
 					<ul>
-						<li>Doit être invariable et déductible</li>
-						<li>Doit discriminer</li>
-						<li>Devrait être métier</li>
+						<li>Doit être <b>invariable</b> et <b>déductible</b></li>
+						<li>Doit <b>discriminer</b></li>
+						<li>Devrait être <b>métier</b></li>
 					</ul>
 					<aside class="notes">
 						<h2>Michel</h2>
@@ -279,24 +278,21 @@ WHERE zone = 'ZONE1'
 				</section>
 				<section>
 					<h2>User Defined Type</h2>
-					<pre>
-						<code>
-CREATE TYPE sensor (
+<pre><code><b style="font-size: xx-large">CREATE TYPE sensor_type (
 	pressure int,
 	hygrometry int
-);
+);</b>
 
 CREATE TABLE station (
 	zone text,
 	epochDay int,
 	station_id text,
 	event_time timestamp,
-	sensor1 sensor,
+	sensor1 <b>sensor_type</b>,
 
 	PRIMARY KEY((zone, epochDay), station_id, event_time)
 );
-</code>
-</pre>
+</code></pre>
 					<aside class="notes">
 						<h2>Michel</h2>
 						TODO
@@ -304,20 +300,15 @@ CREATE TABLE station (
 </section>
 <section>
 		<h2>User Defined Type</h2>
-<pre>
-	<code>
-
-INSERT INTO mykeyspace.stations (zone, epochDay, station_id,
+<pre><code>INSERT INTO mykeyspace.stations (zone, epochDay, station_id,
                                  event_time)
 VALUES (
 	'A',
 	15,
 	'station456',
 	123456789,
-	{'pressure':12,'hygrometry':4}
-);
-						</code>
-					</pre>
+	<b>{'pressure':12,'hygrometry':4}</b>
+);</code></pre>
 					<aside class="notes">
 						<h2>Michel</h2>
 						TODO
@@ -491,16 +482,11 @@ public class CassandraTrigger implements ITrigger {
 				</section>
 				<section>
 					<h2>Vue matérialisée</h2>
-<pre>
-	<code>
-CREATE MATERIALIZED VIEW station_by_type
+<pre><code style="font-size: 24pt; line-height: 120%">CREATE <b>MATERIALIZED VIEW</b> station_by_type
 AS SELECT type, zone, station_id
 FROM station
 WHERE type IS NOT NULL
-PRIMARY KEY (type, zone)
-WITH comment = 'Based on table station' ;
-	</code>
-</pre>
+PRIMARY KEY <b>(type, zone)</b>;</code></pre>
 					<aside class="notes">
 						<h2>Pierre</h2>
 						TODO
@@ -567,7 +553,7 @@ WITH comment = 'Based on table station' ;
 			<section>
 				<section>
 					<h2>Résultat</h2>
-					<img src="img/conclusion.png" class="stretch plain"/>
+					<img src="img/conclusion.png" class="stretch"/>
 					<aside class="notes">
 						<h2>Michel</h2>
 						TODO
