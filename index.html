@@ -9,15 +9,6 @@
 
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/solarized-light.min.css">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad();</script>
-	<script>
-		function vidplay() {
-			var video = document.getElementById("Video1");
-			if (video.paused) {
-				video.play();
-			}
-		}
-	</script>
 </head>
 
 <body>
@@ -654,8 +645,8 @@ PRIMARY KEY <b>(type, zone)</b>;</code></pre>
 var fragmentNumbering = function ( event ) {
   var fragments = $(event.currentSlide).find('.fragment');
   var order = new Array(fragments.length);
-  
-  $(fragments).filter('[data-index]').each( function () { 
+
+  $(fragments).filter('[data-index]').each( function () {
     var index = parseInt($(this).attr('data-index')) - 1;
     if (index < 0 || index >= order.length) {
       alert('Invalid data-index: ' + index);
@@ -667,7 +658,7 @@ var fragmentNumbering = function ( event ) {
       order[index].push($(this));
     }
   });
-  
+
   var index = 0;
   $(fragments).not('[data-index]').each( function () {
     while(typeof order[index] != 'undefined') {
@@ -675,15 +666,24 @@ var fragmentNumbering = function ( event ) {
     }
     order[index] = [ $(this) ];
   });
-  
+
   $(order).each( function (index) {
-    $(this).each( function () { 
+    $(this).each( function () {
       $(this).attr('data-fragment-index', index);
     })
   });
 };
 Reveal.addEventListener('ready', fragmentNumbering);
 Reveal.addEventListener('slidechanged', fragmentNumbering);
+
+hljs.initHighlightingOnLoad();
+
+		function vidplay() {
+			var video = document.getElementById("Video1");
+			if (video.paused) {
+				video.play();
+			}
+		}
 	</script>
 </body>
 </html>
